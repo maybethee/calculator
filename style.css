@@ -1,0 +1,57 @@
+body {
+  display: flex;
+  flex: auto;
+  justify-content: center;
+}
+
+.container {
+  max-width: 800px;
+  height: 1200px;
+  display: flex;
+  flex: auto;
+  flex-flow: column wrap;
+  gap: 15px;
+}
+
+#calcScreen {
+  flex: auto;
+  background-color: gray;
+  font-size: 62px;
+  text-align: right;
+  padding: 40px 0px;
+}
+
+.userBtn {
+  background-color: rgb(75, 60, 60);
+}
+
+.btnOperator {
+  background-color: rgb(128, 0, 233);
+}
+
+button {
+  flex: 1 1 0;
+  background-color: green;
+  color: aliceblue;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 64px;
+  font-weight: 500;
+}
+
+button,
+.row6 {
+  flex-grow: 1;
+}
+
+#btn0 {
+  flex-grow: 2;
+}
+
+.row {
+  display: flex;
+  flex: auto;
+  justify-content: space-around;
+  gap: 15px;
+  width: 700px;
+  height: 150px;
+}
