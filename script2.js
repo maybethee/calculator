@@ -50,6 +50,7 @@ function setOperateNumVals() {
     // store next full number in num2 if num1 != 0;
   } else {
     findResult();
+    displayResult();
     num1 = result;
     a = '';
     console.log("num1 = ", num1);
@@ -81,13 +82,15 @@ btnNum.forEach(btn => {
     if (num1 === 0) {
       numberStrA = btn.innerHTML;
       a += numberStrA;
+      calcScreen.innerText = a;
       console.log("a = ", a);
       // return num1 = num1 * 1;
       
     } else {
-  
+
       numberStrB = btn.innerHTML;
       b += numberStrB;
+      calcScreen.innerText = b;
       console.log("b = ", b);
     }
 
