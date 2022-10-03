@@ -61,11 +61,16 @@ function setOperateNumVals() {
 
 // functions for '=' button;
 function findResult() {
+  console.log("b = ", b);
   num2 = b;
   b = '';
   num2 = num2 * 1;
   console.log("num2 = ", num2);
   operate();
+  
+  // sets correct values for future operator clicks
+  num1 = 0;
+  a = result;
 }
 
 // sends operated result to screen
