@@ -27,9 +27,14 @@ const operators = {
     return result; 
   },
   divide: function (num1, num2) { 
-    result = (num1 * 1) / (num2 * 1); 
-    console.log("result = ", result);
-    return result; 
+    if (num1 === 0 || num2 === 0) {
+      result = `(ノಠ益ಠ)ノ彡┻━┻`;
+      return result;
+    } else {
+      result = (num1 * 1) / (num2 * 1); 
+      console.log("result = ", result);
+      return result; 
+    }
   },
 }
 
@@ -41,36 +46,47 @@ let btnOperator = document.querySelectorAll('.btnOperator');
 let btnEquals = document.querySelector('.btnEquals');
 
 function setOperateNumVals() {
-  if (num1 === 0) {
+  if (result === `(ノಠ益ಠ)ノ彡┻━┻`) {
+    clearScreen();
     num1 = a;
     a = '';
     console.log("num1 = ", num1);
     return num1 = num1 * 1;
+  } else if (num1 === 0) {
+      num1 = a;
+      a = '';
+      console.log("num1 = ", num1);
+      return num1 = num1 * 1;
 
-    // store next full number in num2 if num1 != 0;
-  } else {
-    findResult();
-    displayResult();
-    num1 = result;
-    a = '';
-    console.log("num1 = ", num1);
-    return num2;
-  }
+      // store next full number in num2 if num1 != 0;
+    } else {
+      findResult();
+      displayResult();
+      num1 = result;
+      a = '';
+      console.log("num1 = ", num1);
+      return num2;
+    }
 }
 
 
 // functions for '=' button;
 function findResult() {
-  console.log("b = ", b);
-  num2 = b;
-  b = '';
-  num2 = num2 * 1;
-  console.log("num2 = ", num2);
-  operate();
-  
-  // sets correct values for future operator clicks
-  num1 = 0;
-  a = result;
+  if (b === '') {
+    result = a;
+    num1 = 0;
+  } else {
+    console.log("b = ", b);
+    num2 = b;
+    b = '';
+    num2 = num2 * 1;
+    console.log("num2 = ", num2);
+    operate();
+    
+    // sets correct values for future operator clicks
+    num1 = 0;
+    a = result;
+  }
 }
 
 // sends operated result to screen
@@ -113,6 +129,9 @@ btnEquals.addEventListener('click', () => {
   displayResult();
 })
 
+// clear button
+btnClear.addEventListener('click', clearScreen);
+
 
 // button operatos should return the innerhtml to be used to determine which function to call when equals btn is clicked
 let operatorChoices = btnOperator.forEach(btn => {
@@ -147,4 +166,12 @@ function operate() {
     return operators.divide(num1, num2);
   }
 
+}
+
+function clearScreen() {
+  calcScreen.innerText = 0;
+  a = '';
+  b = '';
+  num1 = 0;
+  num2 = 0;
 }
