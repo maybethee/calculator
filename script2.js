@@ -29,6 +29,7 @@ const operators = {
   divide: function (num1, num2) { 
     if (num1 === 0 || num2 === 0) {
       result = `(ノಠ益ಠ)ノ彡┻━┻`;
+      alert(`you've committed a sinful act, click Clear to reset calculator`);
       return result;
     } else {
       result = (num1 * 1) / (num2 * 1); 
