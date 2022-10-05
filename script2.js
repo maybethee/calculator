@@ -51,11 +51,13 @@ function setOperateNumVals() {
     clearScreen();
     num1 = a;
     a = '';
+    result = 0;
     console.log("num1 = ", num1);
     return num1 = num1 * 1;
   } else if (num1 === 0) {
       num1 = a;
       a = '';
+      result = 0;
       console.log("num1 = ", num1);
       return num1 = num1 * 1;
 
@@ -65,6 +67,7 @@ function setOperateNumVals() {
       displayResult();
       num1 = result;
       a = '';
+      result = 0;
       console.log("num1 = ", num1);
       return num2;
     }
@@ -95,11 +98,16 @@ function findResult() {
 function displayResult() {
   if (result === `(ノಠ益ಠ)ノ彡┻━┻`) {
     calcScreen.innerText = result;
+    // reset values for num button conditionals
     num2 = num2 * 1;
     result = 0;
+    a = '';
   } else {
+    // reset values for num button conditionals
     calcScreen.innerText = result;
     num2 = num2 * 1;
+    result = 0;
+    a = '';
   }
 }
 
@@ -107,8 +115,8 @@ btnNum.forEach(btn => {
 
   btn.addEventListener('click', () => {
     
-    // if user has divided by 0, reset screen on button click
-    if (calcScreen.innerText === `(ノಠ益ಠ)ノ彡┻━┻`) {
+    // reset screen if user divides by 0 or selects new numbers after clicking equals button
+    if (calcScreen.innerText === `(ノಠ益ಠ)ノ彡┻━┻` || result != 0 && a === '') {
 
       // clear string/reset values and get string for first number
       clearScreen();
@@ -116,7 +124,7 @@ btnNum.forEach(btn => {
       a += numberStrA;
       calcScreen.innerText = a;
       console.log("a = ", a);
-    // normal button click
+
     } else if (num1 === 0) {
 
       // get string for first number
@@ -125,7 +133,7 @@ btnNum.forEach(btn => {
       calcScreen.innerText = a;
       console.log("a = ", a);
 
-    // buton click after first operator is clicked
+      // buton click after first operator is clicked
     } else {
 
       // get string for second number
