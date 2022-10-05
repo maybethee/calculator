@@ -117,7 +117,7 @@ btnNum.forEach(btn => {
     
     // reset screen if user divides by 0 or selects new numbers after clicking equals button
     if (calcScreen.innerText === `(ノಠ益ಠ)ノ彡┻━┻` || result != 0 && a === '') {
-
+    
       // clear string/reset values and get string for first number
       clearScreen();
       numberStrA = btn.innerHTML;
@@ -144,6 +144,38 @@ btnNum.forEach(btn => {
     }
 
   })
+})
+
+// adds keyboard functionality for numerical input
+document.addEventListener('keypress', (event) => {
+  const x = event.key;
+  // console.log(`key=${event.key},code=${event.code}`);
+  if (calcScreen.innerText === `(ノಠ益ಠ)ノ彡┻━┻` || result != 0 && a === '' && isFinite(event.key)) {
+
+    // clear string/reset values and get string for first number
+    clearScreen();
+    numberStrA = event.key;
+    a += numberStrA;
+    calcScreen.innerText = a;
+    console.log("a = ", a);
+
+  } else if (num1 === 0 && isFinite(event.key)) {
+
+    // get string for first number
+    numberStrA = event.key;
+    a += numberStrA;
+    calcScreen.innerText = a;
+    console.log("a = ", a);
+
+    // buton click after first operator is clicked
+  } else if (isFinite(event.key)) {
+
+    // get string for second number
+    numberStrB = event.key;
+    b += numberStrB;
+    calcScreen.innerText = b;
+    console.log("b = ", b);
+  }
 })
 
 // button operator listener function
