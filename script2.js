@@ -76,11 +76,6 @@ function setOperateNumVals() {
 
 // functions for '=' button;
 function findResult() {
-  // equal button gets clicked before getting second number
-  if (b === '') {
-    result = a;
-    num1 = 0;
-  } else {
     console.log("b = ", b);
     num2 = b;
     b = '';
@@ -91,7 +86,6 @@ function findResult() {
     // sets correct values for future operator clicks
     num1 = 0;
     a = result;
-  }
 }
 
 // sends operated result to screen
@@ -178,6 +172,9 @@ document.addEventListener('keypress', (event) => {
   }
 })
 
+// delete button listener
+btnDel.addEventListener('click', backspace);
+
 // button operator listener function
 btnOperator.forEach(btn => {
 
@@ -195,7 +192,7 @@ btnEquals.addEventListener('click', () => {
 btnClear.addEventListener('click', clearScreen);
 
 
-// button operatos should return the innerhtml to be used to determine which function to call when equals btn is clicked
+// button operators should return the innerhtml to be used to determine which function to call when equals btn is clicked
 let operatorChoices = btnOperator.forEach(btn => {
 
   btn.addEventListener('click', () => {
@@ -237,4 +234,22 @@ function clearScreen() {
   b = '';
   num1 = 0;
   num2 = 0;
+}
+
+// removes last character from 
+function backspace() {
+  // set screen value to 0 instead of blank
+  if (a === '' || a === null || a.length === 1) {
+    calcScreen.innerText = 0;
+  // typical backspace behavior for a (num1 string)
+  } else if (num1 === 0) {
+    a = a.slice(0, -1);
+    console.log("a = ", a);
+    calcScreen.innerText = a;
+  // typical backspace behavior for b (num2 string)
+  } else {
+    b = b.slice(0, -1);
+    console.log("b = ", b);
+    calcScreen.innerText = b;
+  }
 }
