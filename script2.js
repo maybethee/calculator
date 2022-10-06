@@ -5,7 +5,20 @@ let numberStrB = 0;
 let num1 = 0;
 let num2 = 0;
 let result = 0;
+let lastResult = 0;
 const calcScreen = document.getElementById("calcScreen");
+
+
+// other things to do: 
+
+// 1. delete button (del might be harder, that was extra credit though i think, so abandon that if it seems out of reach atm)
+
+// 2. implement being able to use decimal button (i think i've already done this?) and ensure it can't b clicked twice in one number "(disable the decimal button if there’s already one in the display)" (don't know how to o this yet...)
+
+// 3. make equals function iterate the operation with the newest result when clicked multiple times in a row, so 3 + 3 -> = 6 -> = 9 -> = 12 -> = 15
+
+// 4. make prettier? figure out how to fix flex on the "0 . /" button row
+
 
 // object containing all operators
 const operators = {
@@ -96,10 +109,17 @@ function displayResult() {
     num2 = num2 * 1;
     result = 0;
     a = '';
-  } else {
+    // display last result on screen on consecutive clicks
+  } else if (result === 0) {
+    calcScreen.innerText = lastResult;
+    result = 0;
+    a = '';
+  }
+  else {
     // reset values for num button conditionals
     calcScreen.innerText = result;
     num2 = num2 * 1;
+    lastResult = result;
     result = 0;
     a = '';
   }
