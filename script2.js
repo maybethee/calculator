@@ -47,6 +47,8 @@ let btnOperator = document.querySelectorAll('.btnOperator');
 
 let btnEquals = document.querySelector('.btnEquals');
 
+let btnDecimal = document.querySelector('#btnDecimal')
+
 function setOperateNumVals() {
   if (calcScreen.innerText === `(ノಠ益ಠ)ノ彡┻━┻`) {
     clearScreen();
@@ -72,7 +74,6 @@ function setOperateNumVals() {
       return num2;
     }
 }
-
 
 // functions for '=' button;
 function findResult() {
@@ -152,11 +153,39 @@ btnNum.forEach(btn => {
     })
   })
 
+// same numBtn event listener for the decimal button 
+btnDecimal.addEventListener('click', function decimalClick() {
+  if (calcScreen.innerHTML.includes('.')) {
+    return;
+  } else if (calcScreen.innerText === `(ノಠ益ಠ)ノ彡┻━┻` || result != 0 && a === '') {
+    
+    // clear string/reset values and get string for first number
+    clearScreen();
+    numberStrA = btnDecimal.innerHTML;
+    a += numberStrA;
+    calcScreen.innerText = a;
+    console.log("a = ", a);
+
+  } else if (num1 === 0) {
+
+    // get string for first number
+    numberStrA = btnDecimal.innerHTML;
+    a += numberStrA;
+    calcScreen.innerText = a;
+    console.log("a = ", a);
+
+    // buton click after first operator is clicked
+  } else {
+    // get string for second number
+    numberStrB = btnDecimal.innerHTML;
+    b += numberStrB;
+    calcScreen.innerText = b;
+    console.log("b = ", b);
+    }  
+})
 
 // adds keyboard functionality for numerical input
 document.addEventListener('keydown', (event) => {
-  const x = event.key;
-  // console.log(`key=${event.key},code=${event.code}`);
   if (calcScreen.innerText === `(ノಠ益ಠ)ノ彡┻━┻` || result != 0 && a === '' && isFinite(event.key)) {
 
     // clear string/reset values and get string for first number
@@ -185,15 +214,47 @@ document.addEventListener('keydown', (event) => {
   }
 })
 
-// delete button listener
-btnDel.addEventListener('click', backspace);
-
+// kayboard functionality for decimal button listener
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Backspace') {
+  if (event.key == '.' && calcScreen.innerHTML.includes('.')) {
+    return;
+  } else if (calcScreen.innerText === `(ノಠ益ಠ)ノ彡┻━┻` || result != 0 && a === '') {
+    
+    // clear string/reset values and get string for first number
+    clearScreen();
+    numberStrA = btnDecimal.innerHTML;
+    a += numberStrA;
+    calcScreen.innerText = a;
+    console.log("a = ", a);
+
+  } else if (event.key == '.' && num1 === 0) {
+
+    // get string for first number
+    numberStrA = btnDecimal.innerHTML;
+    a += numberStrA;
+    calcScreen.innerText = a;
+    console.log("a = ", a);
+
+    // buton click after first operator is clicked
+  } else if (event.key == '.') {
+    // get string for second number
+    numberStrB = btnDecimal.innerHTML;
+    b += numberStrB;
+    calcScreen.innerText = b;
+    console.log("b = ", b);
+    }  
+})
+
+// keyboard funcitonality for delete button listener
+document.addEventListener('keydown', (event) => {
+  if (event.key == 'Backspace') {
     backspace();
   }
 }); 
 
+
+// delete button listener
+btnDel.addEventListener('click', backspace);
 
 // button operator listener function
 btnOperator.forEach(btn => {
