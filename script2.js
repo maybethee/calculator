@@ -66,8 +66,8 @@ function setOperateNumVals() {
       findResult();
       displayResult();
       num1 = lastResult;
-      a = '';
-      result = 0;
+      // a = '';
+      // result = 0;
       console.log("num1 = ", num1, "a = ", a, "result = ", result);
       return num2;
     }
@@ -112,8 +112,9 @@ function displayResult() {
     calcScreen.innerText = result;
     num2 = num2 * 1;
     lastResult = result;
+    a = lastResult;
     result = 0;
-    a = '';
+    
     console.log("num1 = ", num1, "a = ", a, "result = ", result);
 
   }
