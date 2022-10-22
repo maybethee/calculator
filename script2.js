@@ -154,7 +154,7 @@ btnNum.forEach(btn => {
 
 
 // adds keyboard functionality for numerical input
-document.addEventListener('keypress', (event) => {
+document.addEventListener('keydown', (event) => {
   const x = event.key;
   // console.log(`key=${event.key},code=${event.code}`);
   if (calcScreen.innerText === `(ノಠ益ಠ)ノ彡┻━┻` || result != 0 && a === '' && isFinite(event.key)) {
@@ -187,6 +187,13 @@ document.addEventListener('keypress', (event) => {
 
 // delete button listener
 btnDel.addEventListener('click', backspace);
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Backspace') {
+    backspace();
+  }
+}); 
+
 
 // button operator listener function
 btnOperator.forEach(btn => {
@@ -249,15 +256,11 @@ function clearScreen() {
   num2 = 0;
 }
 
-// backspace function has bugs when activated after clicking operator but before next number
-
 // removes last character from current number string (a,b)
 function backspace() {
   // set screen value to 0 instead of blank
   if ((a === '' || a === null || a.length <= 1) && (b === '' || b === null || b.length <= 1)) {
-    calcScreen.innerText = 0;
-    a = '';
-    b = '';
+    return;
   // typical backspace behavior for a (num1 string)
   } else if (num1 === 0) {
     console.log('a = ', a)
