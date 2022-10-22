@@ -59,17 +59,16 @@ function setOperateNumVals() {
       num1 = a;
       a = '';
       result = 0;
-      console.log("num1 = ", num1);
+      console.log("num1 = ", num1, "a = ", a, "result = ", result);
       return num1 = num1 * 1;
-
       // store next full number in num2 if num1 != 0;
     } else {
       findResult();
       displayResult();
-      num1 = result;
+      num1 = lastResult;
       a = '';
       result = 0;
-      console.log("num1 = ", num1);
+      console.log("num1 = ", num1, "a = ", a, "result = ", result);
       return num2;
     }
 }
@@ -87,6 +86,7 @@ function findResult() {
     // sets correct values for future operator clicks
     num1 = 0;
     a = result;
+    console.log("num1 = ", num1, "a = ", a, "result = ", result);
 }
 
 // sends operated result to screen
@@ -97,11 +97,15 @@ function displayResult() {
     num2 = num2 * 1;
     result = 0;
     a = '';
+    console.log("num1 = ", num1, "a = ", a, "result = ", result);
+
     // display last result on screen on consecutive clicks
   } else if (result === 0) {
     calcScreen.innerText = lastResult;
     result = 0;
     a = '';
+    console.log("num1 = ", num1, "a = ", a, "result = ", result);
+
   }
   else {
     // reset values for num button conditionals
@@ -110,13 +114,14 @@ function displayResult() {
     lastResult = result;
     result = 0;
     a = '';
+    console.log("num1 = ", num1, "a = ", a, "result = ", result);
+
   }
 }
 
 btnNum.forEach(btn => {
 
-  btn.addEventListener('click', () => {
-    
+  btn.addEventListener('click', function btnClick() {
     // reset screen if user divides by 0 or selects new numbers after clicking equals button
     if (calcScreen.innerText === `(ノಠ益ಠ)ノ彡┻━┻` || result != 0 && a === '') {
     
@@ -137,16 +142,15 @@ btnNum.forEach(btn => {
 
       // buton click after first operator is clicked
     } else {
-
       // get string for second number
       numberStrB = btn.innerHTML;
       b += numberStrB;
       calcScreen.innerText = b;
       console.log("b = ", b);
-    }
-
+      }
+    })
   })
-})
+
 
 // adds keyboard functionality for numerical input
 document.addEventListener('keypress', (event) => {
@@ -244,15 +248,19 @@ function clearScreen() {
   num2 = 0;
 }
 
-// removes last character from 
+// backspace function has bugs when activated after clicking operator but before next number
+
+// removes last character from current number string (a,b)
 function backspace() {
   // set screen value to 0 instead of blank
-  if (a === '' || a === null || a.length === 1) {
+  if ((a === '' || a === null || a.length <= 1) && (b === '' || b === null || b.length <= 1)) {
     calcScreen.innerText = 0;
+    a = '';
+    b = '';
   // typical backspace behavior for a (num1 string)
   } else if (num1 === 0) {
+    console.log('a = ', a)
     a = a.slice(0, -1);
-    console.log("a = ", a);
     calcScreen.innerText = a;
   // typical backspace behavior for b (num2 string)
   } else {
