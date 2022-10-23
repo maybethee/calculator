@@ -265,8 +265,8 @@ btnOperator.forEach(btn => {
 
 // equals button listener function
 btnEquals.addEventListener('click', () => {
-  findResult();
-  displayResult();
+    findResult();
+    displayResult();
 })
 
 // clear button listener function
